@@ -12,10 +12,9 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        brightness: Brightness.dark,
-        primaryColor: const Color.fromARGB(255, 0, 8, 20),
-        fontFamily: 'Georgia'
-      ),
+          brightness: Brightness.dark,
+          primaryColor: const Color.fromARGB(255, 9, 9, 10),
+          fontFamily: 'Georgia'),
       home: const MainScreen(),
       debugShowCheckedModeBanner: false,
     );
