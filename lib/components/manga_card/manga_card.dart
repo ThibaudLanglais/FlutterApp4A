@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_projet_4a/screens/manga_screen.dart';
 import 'package:jikan_api/jikan_api.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class MangaCard extends StatelessWidget {
   const MangaCard({super.key, this.manga});
@@ -8,19 +10,25 @@ class MangaCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 125,
-      decoration: BoxDecoration(
-          borderRadius: const BorderRadius.all(Radius.circular(5)),
-          color: Colors.black54,
-          image: DecorationImage(
-              image: NetworkImage(manga!.imageUrl), fit: BoxFit.cover)),
-      child: Column(
-        children: [
-          // Text(manga!.title, style: TextStyle(color: Colors.white)),
-          // Text(manga!.type.toString(), style: TextStyle(color: Colors.white)),
-        ],
-      ),
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => MangaScreen(manga: manga)) 
+        );
+      },
+      child: Container(
+        width: 125,
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(7))
+        ),
+        child: CachedNetworkImage(
+          imageUrl: manga!.imageUrl, 
+          placeholder: (context, url) => const Center(child: CircularProgressIndicator(color: Colors.white,)),
+          errorWidget: (context, url, error) => const Icon(Icons.error, color: Colors.white, size: 50),
+          fit: BoxFit.cover
+        )
+      )
     );
   }
 }

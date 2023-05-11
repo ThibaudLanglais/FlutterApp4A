@@ -13,4 +13,8 @@ class JikanService {
   Future<BuiltList<Manga>> getTopManga() async {
     return await jikan.getTopManga();
   }
+  
+  Future<BuiltList<Manga>> searchManga() async {
+    return await jikan.searchManga();
+  }
 }
