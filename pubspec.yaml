@@ -10,6 +10,7 @@ dependencies:
   cached_network_image: ^3.2.3
   flutter:
     sdk: flutter
+  http: ^0.13.6
   jikan_api: ^2.1.0
   share_plus: ^7.0.0
   skeletons: ^0.0.3
