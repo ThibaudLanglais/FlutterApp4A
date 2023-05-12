@@ -109,13 +109,12 @@ class Attributes {
     synopsis = json['synopsis'];
     description = json['description'];
     coverImageTopOffset = json['coverImageTopOffset'];
-    titles =
-        json['titles'] != null ? new Titles.fromJson(json['titles']) : null;
+    titles = json['titles'] != null ? Titles.fromJson(json['titles']) : null;
     canonicalTitle = json['canonicalTitle'];
     abbreviatedTitles = json['abbreviatedTitles'].cast<String>();
     averageRating = json['averageRating'];
     ratingFrequencies = json['ratingFrequencies'] != null
-        ? new RatingFrequencies.fromJson(json['ratingFrequencies'])
+        ? RatingFrequencies.fromJson(json['ratingFrequencies'])
         : null;
     userCount = json['userCount'];
     favoritesCount = json['favoritesCount'];
@@ -128,10 +127,10 @@ class Attributes {
     subtype = json['subtype'];
     status = json['status'];
     posterImage = json['posterImage'] != null
-        ? new PosterImage.fromJson(json['posterImage'])
+        ? PosterImage.fromJson(json['posterImage'])
         : null;
     coverImage = json['coverImage'] != null
-        ? new CoverImage.fromJson(json['coverImage'])
+        ? CoverImage.fromJson(json['coverImage'])
         : null;
     chapterCount = json['chapterCount'];
     volumeCount = json['volumeCount'];
@@ -140,42 +139,42 @@ class Attributes {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['createdAt'] = this.createdAt;
-    data['updatedAt'] = this.updatedAt;
-    data['slug'] = this.slug;
-    data['synopsis'] = this.synopsis;
-    data['description'] = this.description;
-    data['coverImageTopOffset'] = this.coverImageTopOffset;
-    if (this.titles != null) {
-      data['titles'] = this.titles!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['createdAt'] = createdAt;
+    data['updatedAt'] = updatedAt;
+    data['slug'] = slug;
+    data['synopsis'] = synopsis;
+    data['description'] = description;
+    data['coverImageTopOffset'] = coverImageTopOffset;
+    if (titles != null) {
+      data['titles'] = titles!.toJson();
     }
-    data['canonicalTitle'] = this.canonicalTitle;
-    data['abbreviatedTitles'] = this.abbreviatedTitles;
-    data['averageRating'] = this.averageRating;
-    if (this.ratingFrequencies != null) {
-      data['ratingFrequencies'] = this.ratingFrequencies!.toJson();
+    data['canonicalTitle'] = canonicalTitle;
+    data['abbreviatedTitles'] = abbreviatedTitles;
+    data['averageRating'] = averageRating;
+    if (ratingFrequencies != null) {
+      data['ratingFrequencies'] = ratingFrequencies!.toJson();
     }
-    data['userCount'] = this.userCount;
-    data['favoritesCount'] = this.favoritesCount;
-    data['startDate'] = this.startDate;
-    data['endDate'] = this.endDate;
-    data['popularityRank'] = this.popularityRank;
-    data['ratingRank'] = this.ratingRank;
-    data['ageRating'] = this.ageRating;
-    data['ageRatingGuide'] = this.ageRatingGuide;
-    data['subtype'] = this.subtype;
-    data['status'] = this.status;
-    if (this.posterImage != null) {
-      data['posterImage'] = this.posterImage!.toJson();
+    data['userCount'] = userCount;
+    data['favoritesCount'] = favoritesCount;
+    data['startDate'] = startDate;
+    data['endDate'] = endDate;
+    data['popularityRank'] = popularityRank;
+    data['ratingRank'] = ratingRank;
+    data['ageRating'] = ageRating;
+    data['ageRatingGuide'] = ageRatingGuide;
+    data['subtype'] = subtype;
+    data['status'] = status;
+    if (posterImage != null) {
+      data['posterImage'] = posterImage!.toJson();
     }
-    if (this.coverImage != null) {
-      data['coverImage'] = this.coverImage!.toJson();
+    if (coverImage != null) {
+      data['coverImage'] = coverImage!.toJson();
     }
-    data['chapterCount'] = this.chapterCount;
-    data['volumeCount'] = this.volumeCount;
-    data['serialization'] = this.serialization;
-    data['mangaType'] = this.mangaType;
+    data['chapterCount'] = chapterCount;
+    data['volumeCount'] = volumeCount;
+    data['serialization'] = serialization;
+    data['mangaType'] = mangaType;
     return data;
   }
 }
@@ -242,25 +241,25 @@ class Titles {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['ar'] = this.ar;
-    data['en'] = this.en;
-    data['cs_cz'] = this.csCz;
-    data['en_jp'] = this.enJp;
-    data['es_es'] = this.esEs;
-    data['fa_ir'] = this.faIr;
-    data['fi_fi'] = this.fiFi;
-    data['fr_fr'] = this.frFr;
-    data['hr_hr'] = this.hrHr;
-    data['it_it'] = this.itIt;
-    data['ja_jp'] = this.jaJp;
-    data['ko_kr'] = this.koKr;
-    data['pt_br'] = this.ptBr;
-    data['ru_ru'] = this.ruRu;
-    data['th_th'] = this.thTh;
-    data['tr_tr'] = this.trTr;
-    data['vi_vn'] = this.viVn;
-    data['zh_cn'] = this.zhCn;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['ar'] = ar;
+    data['en'] = en;
+    data['cs_cz'] = csCz;
+    data['en_jp'] = enJp;
+    data['es_es'] = esEs;
+    data['fa_ir'] = faIr;
+    data['fi_fi'] = fiFi;
+    data['fr_fr'] = frFr;
+    data['hr_hr'] = hrHr;
+    data['it_it'] = itIt;
+    data['ja_jp'] = jaJp;
+    data['ko_kr'] = koKr;
+    data['pt_br'] = ptBr;
+    data['ru_ru'] = ruRu;
+    data['th_th'] = thTh;
+    data['tr_tr'] = trTr;
+    data['vi_vn'] = viVn;
+    data['zh_cn'] = zhCn;
     return data;
   }
 }
@@ -330,26 +329,26 @@ class RatingFrequencies {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['2'] = this.s2;
-    data['3'] = this.s3;
-    data['4'] = this.s4;
-    data['5'] = this.s5;
-    data['6'] = this.s6;
-    data['7'] = this.s7;
-    data['8'] = this.s8;
-    data['9'] = this.s9;
-    data['10'] = this.s10;
-    data['11'] = this.s11;
-    data['12'] = this.s12;
-    data['13'] = this.s13;
-    data['14'] = this.s14;
-    data['15'] = this.s15;
-    data['16'] = this.s16;
-    data['17'] = this.s17;
-    data['18'] = this.s18;
-    data['19'] = this.s19;
-    data['20'] = this.s20;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['2'] = s2;
+    data['3'] = s3;
+    data['4'] = s4;
+    data['5'] = s5;
+    data['6'] = s6;
+    data['7'] = s7;
+    data['8'] = s8;
+    data['9'] = s9;
+    data['10'] = s10;
+    data['11'] = s11;
+    data['12'] = s12;
+    data['13'] = s13;
+    data['14'] = s14;
+    data['15'] = s15;
+    data['16'] = s16;
+    data['17'] = s17;
+    data['18'] = s18;
+    data['19'] = s19;
+    data['20'] = s20;
     return data;
   }
 }
@@ -376,18 +375,18 @@ class PosterImage {
     small = json['small'];
     medium = json['medium'];
     original = json['original'];
-    meta = json['meta'] != null ? new Meta.fromJson(json['meta']) : null;
+    meta = json['meta'] != null ? Meta.fromJson(json['meta']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['tiny'] = this.tiny;
-    data['large'] = this.large;
-    data['small'] = this.small;
-    data['medium'] = this.medium;
-    data['original'] = this.original;
-    if (this.meta != null) {
-      data['meta'] = this.meta!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['tiny'] = tiny;
+    data['large'] = large;
+    data['small'] = small;
+    data['medium'] = medium;
+    data['original'] = original;
+    if (meta != null) {
+      data['meta'] = meta!.toJson();
     }
     return data;
   }
@@ -400,14 +399,14 @@ class Meta {
 
   Meta.fromJson(Map<String, dynamic> json) {
     dimensions = json['dimensions'] != null
-        ? new Dimensions.fromJson(json['dimensions'])
+        ? Dimensions.fromJson(json['dimensions'])
         : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.dimensions != null) {
-      data['dimensions'] = this.dimensions!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (dimensions != null) {
+      data['dimensions'] = dimensions!.toJson();
     }
     return data;
   }
@@ -422,25 +421,25 @@ class Dimensions {
   Dimensions({this.tiny, this.large, this.small, this.medium});
 
   Dimensions.fromJson(Map<String, dynamic> json) {
-    tiny = json['tiny'] != null ? new Tiny.fromJson(json['tiny']) : null;
-    large = json['large'] != null ? new Tiny.fromJson(json['large']) : null;
-    small = json['small'] != null ? new Tiny.fromJson(json['small']) : null;
-    medium = json['medium'] != null ? new Tiny.fromJson(json['medium']) : null;
+    tiny = json['tiny'] != null ? Tiny.fromJson(json['tiny']) : null;
+    large = json['large'] != null ? Tiny.fromJson(json['large']) : null;
+    small = json['small'] != null ? Tiny.fromJson(json['small']) : null;
+    medium = json['medium'] != null ? Tiny.fromJson(json['medium']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.tiny != null) {
-      data['tiny'] = this.tiny!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (tiny != null) {
+      data['tiny'] = tiny!.toJson();
     }
-    if (this.large != null) {
-      data['large'] = this.large!.toJson();
+    if (large != null) {
+      data['large'] = large!.toJson();
     }
-    if (this.small != null) {
-      data['small'] = this.small!.toJson();
+    if (small != null) {
+      data['small'] = small!.toJson();
     }
-    if (this.medium != null) {
-      data['medium'] = this.medium!.toJson();
+    if (medium != null) {
+      data['medium'] = medium!.toJson();
     }
     return data;
   }
@@ -458,9 +457,9 @@ class Tiny {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['width'] = this.width;
-    data['height'] = this.height;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['width'] = width;
+    data['height'] = height;
     return data;
   }
 }
@@ -479,17 +478,17 @@ class CoverImage {
     large = json['large'];
     small = json['small'];
     original = json['original'];
-    meta = json['meta'] != null ? new Meta.fromJson(json['meta']) : null;
+    meta = json['meta'] != null ? Meta.fromJson(json['meta']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['tiny'] = this.tiny;
-    data['large'] = this.large;
-    data['small'] = this.small;
-    data['original'] = this.original;
-    if (this.meta != null) {
-      data['meta'] = this.meta!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['tiny'] = tiny;
+    data['large'] = large;
+    data['small'] = small;
+    data['original'] = original;
+    if (meta != null) {
+      data['meta'] = meta!.toJson();
     }
     return data;
   }

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_projet_4a/components/bottom_navigation_bar/bottom_navigation_container.dart';
 import 'package:flutter_projet_4a/screens/home_screen.dart';
-import 'package:flutter_projet_4a/screens/manga_screen.dart';
-import 'package:jikan_api/jikan_api.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
