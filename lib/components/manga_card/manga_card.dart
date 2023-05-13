@@ -19,14 +19,20 @@ class MangaCard extends StatelessWidget {
       },
       child: Container(
         width: 125,
-        decoration: const BoxDecoration(
+        height: 175,
+        clipBehavior: Clip.hardEdge,
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.white, width: 1),
           borderRadius: BorderRadius.all(Radius.circular(7))
         ),
-        child: CachedNetworkImage(
-          imageUrl: manga!.imageUrl, 
-          placeholder: (context, url) => const Center(child: CircularProgressIndicator(color: Colors.white,)),
-          errorWidget: (context, url, error) => const Icon(Icons.error, color: Colors.white, size: 50),
-          fit: BoxFit.cover
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(7),
+          child: CachedNetworkImage(
+            imageUrl: manga!.imageUrl, 
+            placeholder: (context, url) => const Center(child: CircularProgressIndicator(color: Colors.white,)),
+            errorWidget: (context, url, error) => const Icon(Icons.error, color: Colors.white, size: 50),
+            fit: BoxFit.cover
+          ),
         )
       )
     );
