@@ -54,8 +54,8 @@ class _NavigationState extends State<BottomNavigationContainer> {
             alignment: Alignment.center,
             child: Icon(option.icon,
                 color: widget.currentIndex == option.index
-                    ? Colors.amber
-                    : Colors.white),
+                    ? Theme.of(context).colorScheme.secondary
+                    : Theme.of(context).colorScheme.onBackground),
           ));
     });
     return list;

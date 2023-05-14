@@ -6,7 +6,10 @@ class CalendarScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.transparent,
+      appBar: AppBar(
+        title: Text("Prochaine sorties",
+            style: Theme.of(context).textTheme.titleMedium),
+      ),
       body: Container(
         alignment: Alignment.center,
         child: const Text("Calendar", style: TextStyle(color: Colors.white)),

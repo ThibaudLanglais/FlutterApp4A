@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import '../api_classes/kitsu_search_response.dart';
+import '../classes/kitsu_search_response.dart';
 import 'package:http/http.dart' as http;
 
 class KitsuService {
