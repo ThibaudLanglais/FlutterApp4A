@@ -64,18 +64,20 @@ class _EditorState extends State<MangaSynopsis> {
               overflow: TextOverflow.ellipsis,
               maxLines: isExpanded ? 500 : maxLines,
             ),
-            Container(
-                padding: const EdgeInsets.only(top: 10),
-                alignment: Alignment.centerRight,
-                child: ElevatedButton.icon(
-                    onPressed: () {
-                      setState(() {
-                        isExpanded = !isExpanded;
-                      });
-                    },
-                    icon: Icon(
-                        isExpanded ? Icons.arrow_upward : Icons.arrow_downward),
-                    label: Text(isExpanded ? "Show less" : "Show more")))
+            if (exceeded || isExpanded)
+              Container(
+                  padding: const EdgeInsets.only(top: 10),
+                  alignment: Alignment.centerRight,
+                  child: ElevatedButton.icon(
+                      onPressed: () {
+                        setState(() {
+                          isExpanded = !isExpanded;
+                        });
+                      },
+                      icon: Icon(isExpanded
+                          ? Icons.arrow_upward
+                          : Icons.arrow_downward),
+                      label: Text(isExpanded ? "Show less" : "Show more")))
           ]);
         }),
       ],

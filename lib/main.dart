@@ -1,48 +1,41 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_projet_4a/classes/theme_notifier.dart';
 import 'package:flutter_projet_4a/services/constants.dart';
 import 'package:flutter_projet_4a/services/themes.dart';
+import 'package:flutter_projet_4a/services/utils.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'screens/main_screen.dart';
 
-void main() {
-  runApp(MainApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final prefs = await SharedPreferences.getInstance();
+  final isDarkTheme = prefs.getBool("darkTheme") ?? false;
+
+  runApp(MainApp(isDarkTheme: isDarkTheme));
 }
 
 class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+  const MainApp({super.key, required this.isDarkTheme});
+
+  final bool isDarkTheme;
 
   @override
   Widget build(BuildContext context) {
-    return AdaptiveTheme(
-      light: ThemeData.light().copyWith(primaryColor: Colors.white),
-      dark: ThemeData(
-        fontFamily: 'Ubuntu',
-        scaffoldBackgroundColor: Colors.black,
-        primaryColor: Colors.black,
-        colorScheme: const ColorScheme.dark(
-            background: Colors.black,
-            brightness: Brightness.dark,
-            secondary: Colors.amber),
-        appBarTheme: const AppBarTheme(
-            elevation: 0,
-            color: Colors.transparent,
-            actionsIconTheme: IconThemeData(color: Colors.white)),
-        textTheme:
-            const TextTheme(titleLarge: TextStyle(fontFamily: 'Unbounded')),
-        elevatedButtonTheme: ElevatedButtonThemeData(
-            style: ButtonStyle(
-                backgroundColor:
-                    MaterialStateProperty.all<Color>(Colors.amber))),
-      ),
-      initial: AdaptiveThemeMode.system,
-      builder: (theme, darkTheme) => MaterialApp(
-        themeMode: ThemeMode.dark,
-        theme: theme,
-        darkTheme: darkTheme,
-        home: const MainScreen(),
-        debugShowCheckedModeBanner: false,
-      ),
+    return ChangeNotifierProvider(
+      create: (context) => ThemeNotifier(isDarkTheme),
+      builder: (context, child) {
+        final themeNotifier = Provider.of<ThemeNotifier>(context);
+        Utils.setSystemUIOverlayStyle(themeNotifier.currentTheme.brightness);
+        return MaterialApp(
+          title: "Mangaled",
+          theme: themeNotifier.currentTheme,
+          home: const MainScreen(),
+          debugShowCheckedModeBanner: false,
+        );
+      },
     );
   }
 }

@@ -26,16 +26,22 @@ class _MangaScreenState extends State<MangaScreen> {
 
   void refreshMangas() async {
     if (manga == null) {
-      final Manga result = await JikanService.jikan.getManga(widget.malId);
-      setState(() {
-        manga = result;
-      });
+      try {
+        var result = await JikanService.jikan.getManga(widget.malId);
+        setState(() {
+          manga = result;
+        });
+      } catch (e) {
+        Navigator.pop(context);
+      }
     }
 
-    final result = await SQLHelper.getManga(manga!.malId);
-    setState(() {
-      isBookmarked = result.isNotEmpty;
-    });
+    if (manga != null) {
+      final result = await SQLHelper.getManga(manga!.malId);
+      setState(() {
+        isBookmarked = result.isNotEmpty;
+      });
+    }
   }
 
   @override
@@ -49,7 +55,7 @@ class _MangaScreenState extends State<MangaScreen> {
   @override
   Widget build(BuildContext context) {
     return manga == null
-        ? Center(child: CircularProgressIndicator())
+        ? const Center(child: CircularProgressIndicator())
         : Scaffold(
             extendBodyBehindAppBar: true,
             appBar: AppBar(
@@ -58,11 +64,11 @@ class _MangaScreenState extends State<MangaScreen> {
                 IconButton(
                   icon: const Icon(Icons.copy),
                   onPressed: () {
-                    Clipboard.setData(ClipboardData(text: manga!.url));
+                    Clipboard.setData(ClipboardData(text: manga!.title));
                     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                       behavior: SnackBarBehavior.floating,
                       margin: EdgeInsets.only(bottom: 10, left: 10, right: 10),
-                      content: Text("Titre copié dans le presse-papier"),
+                      content: Text("Title copied to clipboard"),
                       duration: Duration(seconds: 2),
                     ));
                   },
@@ -76,7 +82,7 @@ class _MangaScreenState extends State<MangaScreen> {
                 IconButton(
                   icon: const Icon(Icons.share),
                   onPressed: () {
-                    Share.share(manga!.url);
+                    Share.share("Go read ${manga!.title} at ${manga!.url} !");
                   },
                 )
               ],
@@ -120,29 +126,39 @@ class _MangaScreenState extends State<MangaScreen> {
                           padding: const EdgeInsets.symmetric(horizontal: 15.0),
                           child: Column(children: [
                             Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 MangaCard(
                                     manga: MangaCardObject.fromManga(manga!),
                                     type: CardType.preview),
-                                Padding(
-                                    padding: const EdgeInsets.only(left: 10),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        Wrap(
-                                          spacing: 10,
-                                          children: [
-                                            for (var author in manga!.authors)
-                                              Text(author.name)
-                                          ],
-                                        )
-                                      ],
-                                    ))
+                                Expanded(
+                                  child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 10, top: 10),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Wrap(
+                                            alignment: WrapAlignment.start,
+                                            spacing: 10,
+                                            children: [
+                                              for (var author in manga!.authors)
+                                                Text(author.name,
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .bodyMedium)
+                                            ],
+                                          )
+                                        ],
+                                      )),
+                                )
                               ],
                             ),
                             Container(
-                              padding: EdgeInsets.only(top: 10),
+                              padding: const EdgeInsets.only(top: 20),
                               width: double.infinity,
                               child: ElevatedButton.icon(
                                   style: const ButtonStyle(
@@ -166,10 +182,12 @@ class _MangaScreenState extends State<MangaScreen> {
                                       ? "Remove from bookmarks"
                                       : "Add to bookmarks")),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 20.0),
-                              child: MangaSynopsis(synopsis: manga!.synopsis!),
-                            ),
+                            if (manga!.synopsis != null)
+                              Padding(
+                                padding: const EdgeInsets.only(top: 20.0),
+                                child:
+                                    MangaSynopsis(synopsis: manga!.synopsis!),
+                              ),
                           ])),
                     ),
                   )

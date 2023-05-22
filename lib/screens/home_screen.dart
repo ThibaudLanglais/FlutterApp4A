@@ -17,7 +17,6 @@ class _HomeScreenState extends State<HomeScreen> {
   final List<Map<String, dynamic>> bookmarks = [];
 
   void refreshBookmarks() async {
-    print("refreshing bookmarks");
     final result = await SQLHelper.getMangas();
     setState(() {
       bookmarks.clear();
@@ -26,16 +25,18 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  Future<void> onRefresh() async {
+    refreshBookmarks();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Accueil"), actions: [
-        Switch(
-            value: Theme.of(context).brightness == Brightness.dark,
-            onChanged: (value) {
-              AdaptiveTheme.of(context).toggleThemeMode();
-              AdaptiveTheme.of(context).persist();
-            })
-      ]),
+      appBar: AppBar(title: Text("Home")),
       body: Container(
           alignment: Alignment.center,
           child: Column(
@@ -43,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               const ListTile(
                   title: Text(
-                "Vos mangas suivis",
+                "Your bookmarks",
               )),
               Container(
                   padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -69,14 +70,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     }
                   })),
               const ListTile(
-                title: Text("Suggestions"),
-                subtitle: Text("Selon vos mangas suivis"),
+                title: Text("Top 10 mangas"),
+                subtitle: Text("The most popular mangas from MyAnimeList"),
               ),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
                 height: 176,
                 child: FutureBuilder(
-                    future: JikanService().searchManga(),
+                    future: JikanService().getTopManga(),
                     builder: ((context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.done &&
                           snapshot.hasData) {
